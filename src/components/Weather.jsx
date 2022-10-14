@@ -59,8 +59,6 @@ export default function Weather({
     fetchForecast
   );
 
-  console.log(forecastData);
-
   useEffect(() => {
     setTimeout(() => {
       const [latitude, longitude] = JSON.parse(
@@ -73,24 +71,20 @@ export default function Weather({
 
   const handleOnChange = (searchData) => {
     setSearch(searchData);
-    console.log(searchData);
     const [latitude, longitude] = searchData.value.split(" ");
     setLat(latitude);
     setLon(longitude);
   };
 
-  console.log(weather);
   useEffect(() => {
-    if (weather != undefined) {
+    const index = favourites.findIndex((x) => x.value == `${lat} ${lon}`);
+    if (index != -1) {
       setSearch({
-        value:
-          weather.data.coord.lat.toString() +
-          " " +
-          weather.data.coord.lon.toString(),
-        label: weather.data.name + "," + weather.data.sys.country,
+        value: lat.toString() + " " + lon.toString(),
+        label: favourites[index].text + ", " + favourites[index].country,
       });
     }
-  }, [lat]);
+  }, [lat, lon]);
 
   const changeTab = () => {
     setDaily(!daily);
@@ -121,6 +115,7 @@ export default function Weather({
       {
         id: favourites.length + 1,
         text: search.label.substring(0, search.label.indexOf(",")),
+        country: search.label.substring(search.label.indexOf(",") + 1),
         value: search.value,
       },
     ]);
@@ -130,6 +125,7 @@ export default function Weather({
     const updatedFavourites = favourites;
     const index = favourites.findIndex((x) => x.value == search.value);
     updatedFavourites.splice(index, 1);
+    console.log(updatedFavourites);
     setFavourites((updatedFavourites) => [...updatedFavourites]);
   };
 

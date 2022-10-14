@@ -5,7 +5,9 @@ import MobileSidebar from "../components/MobileSidebar";
 import Sidebar from "../components/Sidebar";
 
 const Home = () => {
-  const [favourites, setFavourites] = useState([{ id: 1, text: "", value: 0 }]);
+  const [favourites, setFavourites] = useState([
+    { id: 1, text: "", country: "", value: 0 },
+  ]);
   const [isOpen, setIsOpen] = useState(false);
   const [unit, setUnit] = useState("metric");
   const [tempChecked, setTempChecked] = useState(false);
@@ -35,7 +37,8 @@ const Home = () => {
       const cities = [
         {
           id: 1,
-          text: "Johannesburg, South Africa",
+          text: "Johannesburg",
+          country: "South Africa",
           value: "-26.204361111 28.041638888",
         },
       ];

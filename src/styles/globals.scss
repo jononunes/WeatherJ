@@ -1,0 +1,49 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Quicksand", sans-serif;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+::placeholder {
+  font-family: "Quicksand";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  color: #ffffff;
+  text-shadow: 2px 2px 5px #000000;
+
+  mix-blend-mode: overlay;
+  opacity: 0.8;
+}
+
+.css-1pahdxg-control,
+.css-1s2u09g-control {
+  background-color: inherit !important;
+  border-style: inherit !important;
+  box-shadow: none !important;
+}
+
+.css-tlfecz-indicatorContainer,
+.css-1gtu0rj-indicatorContainer,
+.css-14el2xx-placeholder,
+.css-1pndypt-Input {
+  color: #ffffff !important;
+}
+
+#react-select-5-listbox {
+  position: absolute !important;
+  margin-left: -35px !important;
+}

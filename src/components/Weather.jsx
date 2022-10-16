@@ -35,6 +35,7 @@ export default function Weather({
   setLon,
   lat,
   setLat,
+  modeChecked,
 }) {
   const [daily, setDaily] = useState(true);
 
@@ -552,13 +553,17 @@ export default function Weather({
           ></video>
           <div className={s.menu}>
             <div className={s.columns}>
-              <div className={s.leftCard}>
+              <div className={`${s.leftCard} ${modeChecked && s.cardNight}`}>
                 <div className={s.detail}>
                   <div className={s.title}>
                     <img src="/hilow.png" alt="" className={s.detailIcon} />
-                    <h1 className={s.category}>Min/Max</h1>
+                    <h1
+                      className={`${s.category} ${modeChecked && s.textNight}`}
+                    >
+                      Min/Max
+                    </h1>
                   </div>
-                  <p className={s.value}>
+                  <p className={`${s.value} ${modeChecked && s.textNight}`}>
                     {isLoading
                       ? ""
                       : weather.data.main.temp_min
@@ -577,9 +582,13 @@ export default function Weather({
                 <div className={s.detail}>
                   <div className={s.title}>
                     <img src="/feelslike.png" alt="" className={s.detailIcon} />
-                    <h1 className={s.category}>Feels Like</h1>
+                    <h1
+                      className={`${s.category} ${modeChecked && s.textNight}`}
+                    >
+                      Feels Like
+                    </h1>
                   </div>
-                  <p className={s.value}>
+                  <p className={`${s.value} ${modeChecked && s.textNight}`}>
                     {isLoading
                       ? ""
                       : weather.data.main.feels_like
@@ -593,9 +602,13 @@ export default function Weather({
                 <div className={s.detail}>
                   <div className={s.title}>
                     <img src="/pressure.png" alt="" className={s.detailIcon} />
-                    <h1 className={s.category}>Pressure</h1>
+                    <h1
+                      className={`${s.category} ${modeChecked && s.textNight}`}
+                    >
+                      Pressure
+                    </h1>
                   </div>
-                  <p className={s.value}>
+                  <p className={`${s.value} ${modeChecked && s.textNight}`}>
                     {isLoading ? "" : weather.data.main.pressure}mb
                   </p>
                 </div>
@@ -603,9 +616,13 @@ export default function Weather({
                 <div className={s.detail}>
                   <div className={s.title}>
                     <img src="/humidity.png" alt="" className={s.detailIcon} />
-                    <h1 className={s.category}>Humidity</h1>
+                    <h1
+                      className={`${s.category} ${modeChecked && s.textNight}`}
+                    >
+                      Humidity
+                    </h1>
                   </div>
-                  <p className={s.value}>
+                  <p className={`${s.value} ${modeChecked && s.textNight}`}>
                     {isLoading ? "" : weather.data.main.humidity}%
                   </p>
                 </div>
@@ -617,19 +634,31 @@ export default function Weather({
                       alt=""
                       className={s.detailIcon}
                     />
-                    <h1 className={s.category}>Visibility</h1>
+                    <h1
+                      className={`${s.category} ${modeChecked && s.textNight}`}
+                    >
+                      Visibility
+                    </h1>
                   </div>
-                  <p className={s.value}>
+                  <p className={`${s.value} ${modeChecked && s.textNight}`}>
                     {isLoading ? "" : weather.data.visibility}km
                   </p>
                 </div>
               </div>
               <div className={s.rightCards}>
-                <div className={s.rightCard}>
+                <div className={`${s.rightCard} ${modeChecked && s.cardNight}`}>
                   <div className={s.cardColumns}>
                     <div className={s.sunriseColumn}>
-                      <h1 className={s.cardHeading}>Sunrise</h1>
-                      <p className={s.sunTime}>
+                      <h1
+                        className={`${s.cardHeading} ${
+                          modeChecked && s.textNight
+                        }`}
+                      >
+                        Sunrise
+                      </h1>
+                      <p
+                        className={`${s.sunTime} ${modeChecked && s.textNight}`}
+                      >
                         {isLoading
                           ? ""
                           : new Date(
@@ -643,8 +672,16 @@ export default function Weather({
                       <img src="/sunrise.png" alt="" className={s.sunsetIcon} />
                     </div>
                     <div className={s.sunriseColumn}>
-                      <h1 className={s.cardHeading}>Sunset</h1>
-                      <p className={s.sunTime}>
+                      <h1
+                        className={`${s.cardHeading} ${
+                          modeChecked && s.textNight
+                        }`}
+                      >
+                        Sunset
+                      </h1>
+                      <p
+                        className={`${s.sunTime} ${modeChecked && s.textNight}`}
+                      >
                         {isLoading
                           ? ""
                           : new Date(
@@ -659,9 +696,15 @@ export default function Weather({
                     </div>
                   </div>
                 </div>
-                <div className={s.rightCard}>
+                <div className={`${s.rightCard} ${modeChecked && s.cardNight}`}>
                   <div className={s.menuCardTitle}>
-                    <h1 className={s.cardHeading}>Wind</h1>
+                    <h1
+                      className={`${s.cardHeading} ${
+                        modeChecked && s.textNight
+                      }`}
+                    >
+                      Wind
+                    </h1>
                     <img
                       src="/wind-icon.png"
                       alt=""
@@ -671,8 +714,18 @@ export default function Weather({
                   <div className={s.cardColumns}>
                     <div className={s.windColumn}>
                       <img src="/windspeed.png" alt="" className={s.windIcon} />
-                      <h1 className={s.windHeading}>Speed</h1>
-                      <p className={s.windValue}>
+                      <h1
+                        className={`${s.windHeading} ${
+                          modeChecked && s.textNight
+                        }`}
+                      >
+                        Speed
+                      </h1>
+                      <p
+                        className={`${s.windValue} ${
+                          modeChecked && s.textNight
+                        }`}
+                      >
                         {isLoading ? "" : weather.data.wind.speed}km/h
                       </p>
                     </div>
@@ -682,23 +735,49 @@ export default function Weather({
                         alt=""
                         className={s.windIcon}
                       />
-                      <h1 className={s.windHeading}>Direction</h1>
-                      <p className={s.windValue}>
+                      <h1
+                        className={`${s.windHeading} ${
+                          modeChecked && s.textNight
+                        }`}
+                      >
+                        Direction
+                      </h1>
+                      <p
+                        className={`${s.windValue} ${
+                          modeChecked && s.textNight
+                        }`}
+                      >
                         {isLoading ? "" : weather.data.wind.deg}°
                       </p>
                     </div>
                     <div className={s.windColumn}>
                       <img src="/windgusts.png" alt="" className={s.windIcon} />
-                      <h1 className={s.windHeading}>Gust</h1>
-                      <p className={s.windValue}>
+                      <h1
+                        className={`${s.windHeading} ${
+                          modeChecked && s.textNight
+                        }`}
+                      >
+                        Gust
+                      </h1>
+                      <p
+                        className={`${s.windValue} ${
+                          modeChecked && s.textNight
+                        }`}
+                      >
                         {isLoading ? "" : weather.data.wind.speed}km/h
                       </p>
                     </div>
                   </div>
                 </div>
-                <div className={s.rightCard}>
+                <div className={`${s.rightCard} ${modeChecked && s.cardNight}`}>
                   <div className={s.menuCardTitle}>
-                    <h1 className={s.cardHeading}>UV Index</h1>
+                    <h1
+                      className={`${s.cardHeading} ${
+                        modeChecked && s.textNight
+                      }`}
+                    >
+                      UV Index
+                    </h1>
                     <img src="/uvicon.png" alt="" className={s.menuCardIcon} />
                   </div>
                   <ReactEcharts option={option} className={s.uvIndex} />

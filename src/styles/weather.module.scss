@@ -627,6 +627,18 @@
   }
 }
 
+.cardNight {
+  background: linear-gradient(
+    180deg,
+    #262626 0%,
+    rgba(0, 0, 0, 0.9) 100%
+  ) !important;
+}
+
+.textNight {
+  color: #ffffff !important;
+}
+
 .detail {
   display: flex;
   flex-direction: row;

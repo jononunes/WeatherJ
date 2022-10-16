@@ -9,6 +9,9 @@ export default function Sidebar({
   switchUnit,
   tempChecked,
   changeTemp,
+  switchMode,
+  modeChecked,
+  changeMode,
   favourites,
   setLat,
   setLon,
@@ -25,7 +28,9 @@ export default function Sidebar({
 
   return (
     <div>
-      <section className={s.sidebarSection}>
+      <section
+        className={`${s.sidebarSection} ${modeChecked && s.sectionNight}`}
+      >
         <div className={s.top}>
           <div className={s.brand}>
             <Image
@@ -41,14 +46,18 @@ export default function Sidebar({
           <div className={s.menu}></div>
           <div className={s.links}>
             <ul className={s.linksUl}>
-              <div className={s.favouritesHeading}>
+              <div
+                className={`${s.favouritesHeading} ${
+                  modeChecked && s.headingNight
+                }`}
+              >
                 <span>Favourite Locations</span>
                 <FaRegStar />
               </div>
               {favourites.map((val, index) => (
                 <li
                   key={index}
-                  className={activeId === val.id ? s.active : s.linksLi}
+                  className={`${s.linksLi} ${modeChecked && s.headingNight}`}
                   onClick={() => changeCity(val.id)}
                 >
                   <a href="#">
@@ -57,15 +66,31 @@ export default function Sidebar({
                   </a>
                 </li>
               ))}
-              <div className={s.preferencesHeading}>
+              <div
+                className={`${s.preferencesHeading} ${
+                  modeChecked && s.headingNight
+                }`}
+              >
                 <span>Preferences</span>
                 <GoSettings />
               </div>
               <div className={s.preferencesToggles}>
-                <div className={s.checkbox_toggle} id={s.dn_cb}>
-                  <input type="checkbox" className={s.checkbox} />
+                <div
+                  className={s.checkbox_toggle}
+                  id={s.dn_cb}
+                  onClick={switchMode}
+                >
+                  <input
+                    type="checkbox"
+                    className={s.checkbox}
+                    checked={modeChecked}
+                    onClick={changeMode}
+                    readOnly
+                  />
                   <div className={s.knobs}></div>
-                  <div className={s.layer}></div>
+                  <div
+                    className={`${s.layer} ${modeChecked && s.layerNight}`}
+                  ></div>
                 </div>
 
                 <div
@@ -81,13 +106,17 @@ export default function Sidebar({
                     readOnly
                   />
                   <div className={s.knobs}></div>
-                  <div className={s.layer}></div>
+                  <div
+                    className={`${s.layer} ${modeChecked && s.layerNight}`}
+                  ></div>
                 </div>
 
                 <div className={s.checkbox_toggle} id={s.time_cb}>
                   <input type="checkbox" className={s.checkbox} />
                   <div className={s.knobs}></div>
-                  <div className={s.layer}></div>
+                  <div
+                    className={`${s.layer} ${modeChecked && s.layerNight}`}
+                  ></div>
                 </div>
               </div>
             </ul>

@@ -62,6 +62,10 @@
           gap: 1rem;
         }
 
+        .headingNight {
+          color: #ffffff !important;
+        }
+
         .preferencesHeading {
           color: #848484;
           font-weight: 700;
@@ -102,14 +106,11 @@
 
           a {
             display: flex;
-            // color: #009393;
             gap: 0.5rem;
             align-items: center;
           }
 
           &:hover {
-            //background-color: #009393;
-
             a {
               color: #009393;
               font-weight: 700;
@@ -119,6 +120,10 @@
       }
     }
   }
+}
+
+.sectionNight {
+  background-color: #262626 !important;
 }
 
 .preferencesToggles {
@@ -176,6 +181,10 @@
   box-shadow: inset 0px 2px 6px rgba(0, 0, 0, 0.05);
 }
 
+.layerNight {
+  background-color: #565656;
+}
+
 .knobs:before {
   position: absolute;
   top: 2px;
@@ -229,6 +238,12 @@
 #time_cb .checkbox:checked ~ .layer,
 #dn_cb .checkbox:checked ~ .layer {
   background-color: #e9e9e9;
+}
+
+#temp_cb .checkbox:checked ~ .layerNight,
+#time_cb .checkbox:checked ~ .layerNight,
+#dn_cb .checkbox:checked ~ .layerNight {
+  background-color: #565656 !important;
 }
 
 #temp_cb .knobs,

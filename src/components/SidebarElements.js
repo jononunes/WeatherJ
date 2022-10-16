@@ -4,7 +4,8 @@ export const SidebarContainer = styled.aside`
   position: fixed;
   z-index: 999;
   left: 0;
-  background-color: #ffffff;
+  background-color: ${({ modeChecked }) =>
+    modeChecked ? "#262626" : "#ffffff"};
   height: 100vh;
   width: 85vw;
   display: flex;

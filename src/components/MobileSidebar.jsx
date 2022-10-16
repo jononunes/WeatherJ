@@ -12,13 +12,26 @@ export default function MobileSidebar({
   switchUnit,
   tempChecked,
   changeTemp,
+  switchMode,
+  modeChecked,
+  changeMode,
   favourites,
+  setLat,
+  setLon,
 }) {
   const [activeId, setActiveId] = useState(1);
 
+  const changeCity = (id) => {
+    setActiveId(id);
+    const index = favourites.findIndex((x) => x.id === id);
+    const [latitude, longitude] = favourites[index].value.split(" ");
+    setLat(latitude);
+    setLon(longitude);
+  };
+
   return (
     <div>
-      <SidebarContainer isOpen={isOpen}>
+      <SidebarContainer isOpen={isOpen} modeChecked={modeChecked}>
         <div className={s.top}>
           <div className={s.brand}>
             <div className={s.title}>
@@ -38,15 +51,19 @@ export default function MobileSidebar({
           </div>
           <div className={s.links}>
             <ul className={s.linksUl}>
-              <div className={s.favouritesHeading}>
+              <div
+                className={`${s.favouritesHeading} ${
+                  modeChecked && s.headingNight
+                }`}
+              >
                 <span>Favourite Locations</span>
                 <FaRegStar />
               </div>
               {favourites.map((val, index) => (
                 <li
                   key={index}
-                  className={activeId === val.id ? s.active : s.linksLi}
-                  onClick={() => setActiveId(val.id)}
+                  className={`${s.linksLi} ${modeChecked && s.headingNight}`}
+                  onClick={() => changeCity(val.id)}
                 >
                   <a href="#">
                     <GoLocation />
@@ -54,15 +71,31 @@ export default function MobileSidebar({
                   </a>
                 </li>
               ))}
-              <div className={s.preferencesHeading}>
+              <div
+                className={`${s.preferencesHeading} ${
+                  modeChecked && s.headingNight
+                }`}
+              >
                 <span>Preferences</span>
                 <GoSettings />
               </div>
               <div className={s.preferencesToggles}>
-                <div className={s.checkbox_toggle} id={s.dn_cb}>
-                  <input type="checkbox" className={s.checkbox} />
+                <div
+                  className={s.checkbox_toggle}
+                  id={s.dn_cb}
+                  onClick={switchMode}
+                >
+                  <input
+                    type="checkbox"
+                    className={s.checkbox}
+                    checked={modeChecked}
+                    onClick={changeMode}
+                    readOnly
+                  />
                   <div className={s.knobs}></div>
-                  <div className={s.layer}></div>
+                  <div
+                    className={`${s.layer} ${modeChecked && s.layerNight}`}
+                  ></div>
                 </div>
 
                 <div
@@ -78,13 +111,17 @@ export default function MobileSidebar({
                     readOnly
                   />
                   <div className={s.knobs}></div>
-                  <div className={s.layer}></div>
+                  <div
+                    className={`${s.layer} ${modeChecked && s.layerNight}`}
+                  ></div>
                 </div>
 
                 <div className={s.checkbox_toggle} id={s.time_cb}>
                   <input type="checkbox" className={s.checkbox} />
                   <div className={s.knobs}></div>
-                  <div className={s.layer}></div>
+                  <div
+                    className={`${s.layer} ${modeChecked && s.layerNight}`}
+                  ></div>
                 </div>
               </div>
             </ul>

@@ -10,7 +10,9 @@ const Home = () => {
   ]);
   const [isOpen, setIsOpen] = useState(false);
   const [unit, setUnit] = useState("metric");
+  const [mode, setMode] = useState("Day");
   const [tempChecked, setTempChecked] = useState(false);
+  const [modeChecked, setModeChecked] = useState(false);
   const [lon, setLon] = useState("28.041638888");
   const [lat, setLat] = useState("-26.204361111");
 
@@ -28,8 +30,22 @@ const Home = () => {
     }
   };
 
+  const switchMode = () => {
+    if (mode === "Day") {
+      setMode("Night");
+      localStorage.setItem("Mode", "Night");
+    } else {
+      setMode("Day");
+      localStorage.setItem("Mode", "Day");
+    }
+  };
+
   const changeTemp = () => {
     setTempChecked(!tempChecked);
+  };
+
+  const changeMode = () => {
+    setModeChecked(!modeChecked);
   };
 
   useEffect(() => {
@@ -58,6 +74,14 @@ const Home = () => {
       setUnit("imperial");
       setTempChecked(true);
     }
+
+    if (localStorage.getItem("Mode") === "Day") {
+      setMode("Day");
+      setModeChecked(false);
+    } else {
+      setMode("Night");
+      setModeChecked(true);
+    }
   }, []);
 
   useEffect(() => {
@@ -74,12 +98,20 @@ const Home = () => {
         switchUnit={switchUnit}
         tempChecked={tempChecked}
         changeTemp={changeTemp}
+        switchMode={switchMode}
+        modeChecked={modeChecked}
+        changeMode={changeMode}
         favourites={favourites}
+        setLat={setLat}
+        setLon={setLon}
       />
       <Sidebar
         switchUnit={switchUnit}
         tempChecked={tempChecked}
         changeTemp={changeTemp}
+        switchMode={switchMode}
+        modeChecked={modeChecked}
+        changeMode={changeMode}
         favourites={favourites}
         setLat={setLat}
         setLon={setLon}
@@ -93,6 +125,7 @@ const Home = () => {
         setLon={setLon}
         lat={lat}
         setLat={setLat}
+        modeChecked={modeChecked}
       />
     </div>
   );

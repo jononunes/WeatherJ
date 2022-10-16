@@ -19,11 +19,8 @@ export default function MobileSidebar({
   setLat,
   setLon,
 }) {
-  const [activeId, setActiveId] = useState(1);
-
-  const changeCity = (id) => {
-    setActiveId(id);
-    const index = favourites.findIndex((x) => x.id === id);
+  const changeCity = (text) => {
+    const index = favourites.findIndex((x) => x.text === text);
     const [latitude, longitude] = favourites[index].value.split(" ");
     setLat(latitude);
     setLon(longitude);
@@ -63,7 +60,7 @@ export default function MobileSidebar({
                 <li
                   key={index}
                   className={`${s.linksLi} ${modeChecked && s.headingNight}`}
-                  onClick={() => changeCity(val.id)}
+                  onClick={() => changeCity(val.text)}
                 >
                   <a href="#">
                     <GoLocation />

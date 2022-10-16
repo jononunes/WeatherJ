@@ -60,6 +60,8 @@ export default function Weather({
     fetchForecast
   );
 
+  console.log(forecastData);
+
   useEffect(() => {
     setTimeout(() => {
       const [latitude, longitude] = JSON.parse(
@@ -171,7 +173,11 @@ export default function Weather({
         ? weekday[d.getDay()].substring(0, 3)
         : loadingForecast
         ? ""
-        : forecastData.data.list[0].dt_txt.substring(11, 16),
+        : new Date(
+            (forecastData.data.list[0].dt + weather.data.timezone) * 1000
+          )
+            .toUTCString()
+            .substring(17, 20) + "00",
       date: daily ? d.getDate() + " " + month.substring(0, 3) : "",
       image: loadingForecast
         ? "/partly-cloudy.png"
@@ -191,7 +197,11 @@ export default function Weather({
           : weekday[d.getDay() - 7 + 1].substring(0, 3)
         : loadingForecast
         ? ""
-        : forecastData.data.list[1].dt_txt.substring(11, 16),
+        : new Date(
+            (forecastData.data.list[1].dt + weather.data.timezone) * 1000
+          )
+            .toUTCString()
+            .substring(17, 20) + "00",
       date: daily
         ? d.getDate() + 1 <= daysInMonths[d.getMonth()]
           ? d.getDate() + 1 + " " + month.substring(0, 3)
@@ -230,7 +240,11 @@ export default function Weather({
           : weekday[d.getDay() - 7 + 2].substring(0, 3)
         : loadingForecast
         ? ""
-        : forecastData.data.list[2].dt_txt.substring(11, 16),
+        : new Date(
+            (forecastData.data.list[2].dt + weather.data.timezone) * 1000
+          )
+            .toUTCString()
+            .substring(17, 20) + "00",
       date: daily
         ? d.getDate() + 2 <= daysInMonths[d.getMonth()]
           ? d.getDate() + 2 + " " + month.substring(0, 3)
@@ -269,7 +283,11 @@ export default function Weather({
           : weekday[d.getDay() - 7 + 3].substring(0, 3)
         : loadingForecast
         ? ""
-        : forecastData.data.list[3].dt_txt.substring(11, 16),
+        : new Date(
+            (forecastData.data.list[3].dt + weather.data.timezone) * 1000
+          )
+            .toUTCString()
+            .substring(17, 20) + "00",
       date: daily
         ? d.getDate() + 3 <= daysInMonths[d.getMonth()]
           ? d.getDate() + 3 + " " + month.substring(0, 3)
@@ -308,7 +326,11 @@ export default function Weather({
           : weekday[d.getDay() - 7 + 4].substring(0, 3)
         : loadingForecast
         ? ""
-        : forecastData.data.list[4].dt_txt.substring(11, 16),
+        : new Date(
+            (forecastData.data.list[4].dt + weather.data.timezone) * 1000
+          )
+            .toUTCString()
+            .substring(17, 20) + "00",
       date: daily
         ? d.getDate() + 4 <= daysInMonths[d.getMonth()]
           ? d.getDate() + 4 + " " + month.substring(0, 3)

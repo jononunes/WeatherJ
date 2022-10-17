@@ -3,7 +3,6 @@ import { GoLocation, GoSettings } from "react-icons/go";
 import { FaRegStar, FaTimes } from "react-icons/fa";
 import Image from "next/image";
 
-import { SidebarContainer } from "./SidebarElements";
 import s from "../styles/mobileSidebar.module.scss";
 
 export default function MobileSidebar({
@@ -31,7 +30,11 @@ export default function MobileSidebar({
 
   return (
     <div>
-      <SidebarContainer isOpen={isOpen} modeChecked={modeChecked}>
+      <aside
+        className={`${s.sidebarSection} ${isOpen && s.sidebarOpen} ${
+          modeChecked && s.sectionNight
+        }`}
+      >
         <div className={s.top}>
           <div className={s.brand}>
             <div className={s.title}>
@@ -137,7 +140,7 @@ export default function MobileSidebar({
             </ul>
           </div>
         </div>
-      </SidebarContainer>
+      </aside>
     </div>
   );
 }

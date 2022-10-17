@@ -61,8 +61,6 @@ export default function Weather({
     fetchForecast
   );
 
-  console.log(forecastData);
-
   useEffect(() => {
     setTimeout(() => {
       const [latitude, longitude] = JSON.parse(
@@ -129,7 +127,6 @@ export default function Weather({
     const updatedFavourites = favourites;
     const index = favourites.findIndex((x) => x.value == search.value);
     updatedFavourites.splice(index, 1);
-    console.log(updatedFavourites);
     setFavourites((updatedFavourites) => [...updatedFavourites]);
   };
 
@@ -185,7 +182,7 @@ export default function Weather({
       id: 1,
       day: daily
         ? weekday[d.getDay()].substring(0, 3)
-        : loadingForecast
+        : loadingForecast || isLoading
         ? ""
         : timeChecked
         ? convert12Hour(
@@ -217,7 +214,7 @@ export default function Weather({
         ? d.getDay() + 1 <= 6
           ? weekday[d.getDay() + 1].substring(0, 3)
           : weekday[d.getDay() - 7 + 1].substring(0, 3)
-        : loadingForecast
+        : loadingForecast || isLoading
         ? ""
         : timeChecked
         ? convert12Hour(
@@ -268,7 +265,7 @@ export default function Weather({
         ? d.getDay() + 2 <= 6
           ? weekday[d.getDay() + 2].substring(0, 3)
           : weekday[d.getDay() - 7 + 2].substring(0, 3)
-        : loadingForecast
+        : loadingForecast || isLoading
         ? ""
         : timeChecked
         ? convert12Hour(
@@ -319,7 +316,7 @@ export default function Weather({
         ? d.getDay() + 3 <= 6
           ? weekday[d.getDay() + 3].substring(0, 3)
           : weekday[d.getDay() - 7 + 3].substring(0, 3)
-        : loadingForecast
+        : loadingForecast || isLoading
         ? ""
         : timeChecked
         ? convert12Hour(
@@ -370,7 +367,7 @@ export default function Weather({
         ? d.getDay() + 4 <= 6
           ? weekday[d.getDay() + 4].substring(0, 3)
           : weekday[d.getDay() - 7 + 4].substring(0, 3)
-        : loadingForecast
+        : loadingForecast || isLoading
         ? ""
         : timeChecked
         ? convert12Hour(
@@ -517,7 +514,7 @@ export default function Weather({
             <img src="/searchIcon.png" alt="" className={s.searchIcon} />
             <AsyncPaginate
               placeholder="Search location..."
-              debounceTimeout={600}
+              debounceTimeout={700}
               value="Search location..."
               onChange={handleOnChange}
               className={s.searchBar}

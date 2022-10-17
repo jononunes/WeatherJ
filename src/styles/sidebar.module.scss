@@ -1,3 +1,5 @@
+@use "./mixin.scss" as *;
+
 .sidebarSection {
   position: fixed;
   left: 0;
@@ -37,7 +39,7 @@
       .logoText {
         font-size: 24px;
         font-weight: 700;
-        color: #009393;
+        color: $clr-primary;
         padding-right: 1rem;
         margin-left: -1.1rem;
       }
@@ -55,7 +57,7 @@
         padding-inline-start: 1.5rem;
 
         .favouritesHeading {
-          color: #848484;
+          color: $clr-heading;
           font-weight: 700;
           display: flex;
           align-items: center;
@@ -67,7 +69,7 @@
         }
 
         .preferencesHeading {
-          color: #848484;
+          color: $clr-heading;
           font-weight: 700;
           display: flex;
           align-items: center;
@@ -76,7 +78,7 @@
         }
 
         .linksLi {
-          color: #848484;
+          color: $clr-heading;
           padding: 0rem 1rem;
           border-radius: 0.6rem;
           cursor: pointer;
@@ -86,7 +88,7 @@
             //background-color: #009393;
 
             a {
-              color: #009393;
+              color: $clr-primary;
               font-weight: 700;
             }
           }
@@ -98,7 +100,7 @@
           }
         }
         .active {
-          color: #848484;
+          color: $clr-heading;
           font-weight: 500;
           padding: 0rem 1rem;
           border-radius: 0.6rem;
@@ -112,7 +114,7 @@
 
           &:hover {
             a {
-              color: #009393;
+              color: $clr-primary;
               font-weight: 700;
             }
           }
@@ -123,7 +125,7 @@
 }
 
 .sectionNight {
-  background-color: #262626 !important;
+  background-color: $clr-dark-primary !important;
 }
 
 .preferencesToggles {
@@ -182,7 +184,7 @@
 }
 
 .layerNight {
-  background-color: #565656;
+  background-color: $clr-dark-secondary;
 }
 
 .knobs:before {
@@ -196,14 +198,14 @@
   text-align: center;
   line-height: 1;
   padding: 9px 4px;
-  background-color: #00e0c6;
+  background-color: $clr-secondary;
   border-radius: 50%;
   transition: 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15) all;
 }
 
 .checkbox:checked + .knobs:before {
   left: 55px;
-  background-color: #00e0c6;
+  background-color: $clr-secondary;
 }
 
 #temp_cb .knobs:before {
@@ -243,7 +245,7 @@
 #temp_cb .checkbox:checked ~ .layerNight,
 #time_cb .checkbox:checked ~ .layerNight,
 #dn_cb .checkbox:checked ~ .layerNight {
-  background-color: #565656 !important;
+  background-color: $clr-dark-secondary !important;
 }
 
 #temp_cb .knobs,

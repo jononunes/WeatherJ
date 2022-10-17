@@ -1,3 +1,5 @@
+@use "./mixin.scss" as *;
+
 .headerSection {
   margin-left: 15vw;
   height: 100vh;
@@ -135,7 +137,7 @@
   font-style: normal;
   font-weight: 600;
   font-size: 16px;
-  color: #848484;
+  color: $clr-heading;
   // text-shadow: 2px 2px 5px #000000;
 
   &:focus {
@@ -484,7 +486,7 @@
   margin-bottom: 10rem;
   border: 20px solid #eaf0f6;
   border-radius: 50%;
-  border-top: 20px solid #009393;
+  border-top: 20px solid $clr-primary;
   width: 200px;
   height: 200px;
   animation: spinner 4s linear infinite;
@@ -658,7 +660,7 @@
 }
 
 .category {
-  color: #848484;
+  color: $clr-heading;
   font-weight: 500;
 
   @media screen and (max-width: 375px) {
@@ -667,7 +669,7 @@
 }
 
 .value {
-  color: #848484;
+  color: $clr-heading;
   font-weight: 500;
   font-size: 20px;
   margin-left: 10px;
@@ -678,7 +680,7 @@
 }
 
 .divider {
-  background-color: #848484;
+  background-color: $clr-heading;
   height: 1px;
 }
 
@@ -726,7 +728,7 @@
 }
 
 .cardHeading {
-  color: #848484;
+  color: $clr-heading;
   font-weight: 500;
   font-size: 24px;
   margin: 0;
@@ -739,7 +741,7 @@
 }
 
 .sunTime {
-  color: #848484;
+  color: $clr-heading;
   font-size: 28px;
   font-weight: 300;
   margin: 0;
@@ -768,7 +770,7 @@
 }
 
 .windHeading {
-  color: #848484;
+  color: $clr-heading;
   margin: 0;
   font-weight: 600;
 
@@ -778,7 +780,7 @@
 }
 
 .windValue {
-  color: #848484;
+  color: $clr-heading;
   font-weight: 300;
   margin: 0;
   font-size: 20px;

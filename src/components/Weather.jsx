@@ -36,6 +36,7 @@ export default function Weather({
   lat,
   setLat,
   modeChecked,
+  timeChecked,
 }) {
   const [daily, setDaily] = useState(true);
 
@@ -132,6 +133,19 @@ export default function Weather({
     setFavourites((updatedFavourites) => [...updatedFavourites]);
   };
 
+  function convert12Hour(time) {
+    let dt = new Date();
+    let newHours = 0;
+
+    if (parseInt(time) > 12) {
+      newHours = parseInt(time) % 12;
+
+      return newHours.toString() + "PM";
+    } else {
+      return time + "AM";
+    }
+  }
+
   const weekday = [
     "Sunday",
     "Monday",
@@ -173,6 +187,14 @@ export default function Weather({
         ? weekday[d.getDay()].substring(0, 3)
         : loadingForecast
         ? ""
+        : timeChecked
+        ? convert12Hour(
+            new Date(
+              (forecastData.data.list[0].dt + weather.data.timezone) * 1000
+            )
+              .toUTCString()
+              .substring(17, 19)
+          )
         : new Date(
             (forecastData.data.list[0].dt + weather.data.timezone) * 1000
           )
@@ -197,6 +219,14 @@ export default function Weather({
           : weekday[d.getDay() - 7 + 1].substring(0, 3)
         : loadingForecast
         ? ""
+        : timeChecked
+        ? convert12Hour(
+            new Date(
+              (forecastData.data.list[1].dt + weather.data.timezone) * 1000
+            )
+              .toUTCString()
+              .substring(17, 19)
+          )
         : new Date(
             (forecastData.data.list[1].dt + weather.data.timezone) * 1000
           )
@@ -240,6 +270,14 @@ export default function Weather({
           : weekday[d.getDay() - 7 + 2].substring(0, 3)
         : loadingForecast
         ? ""
+        : timeChecked
+        ? convert12Hour(
+            new Date(
+              (forecastData.data.list[2].dt + weather.data.timezone) * 1000
+            )
+              .toUTCString()
+              .substring(17, 19)
+          )
         : new Date(
             (forecastData.data.list[2].dt + weather.data.timezone) * 1000
           )
@@ -283,6 +321,14 @@ export default function Weather({
           : weekday[d.getDay() - 7 + 3].substring(0, 3)
         : loadingForecast
         ? ""
+        : timeChecked
+        ? convert12Hour(
+            new Date(
+              (forecastData.data.list[3].dt + weather.data.timezone) * 1000
+            )
+              .toUTCString()
+              .substring(17, 19)
+          )
         : new Date(
             (forecastData.data.list[3].dt + weather.data.timezone) * 1000
           )
@@ -326,6 +372,14 @@ export default function Weather({
           : weekday[d.getDay() - 7 + 4].substring(0, 3)
         : loadingForecast
         ? ""
+        : timeChecked
+        ? convert12Hour(
+            new Date(
+              (forecastData.data.list[4].dt + weather.data.timezone) * 1000
+            )
+              .toUTCString()
+              .substring(17, 19)
+          )
         : new Date(
             (forecastData.data.list[4].dt + weather.data.timezone) * 1000
           )
@@ -523,6 +577,19 @@ export default function Weather({
             <p className={s.time}>
               {isLoading
                 ? ""
+                : timeChecked
+                ? convert12Hour(
+                    new Date((weather.data.dt + weather.data.timezone) * 1000)
+                      .toUTCString()
+                      .substring(17, 19)
+                  ).slice(0, 2) +
+                  ":" +
+                  minutes +
+                  convert12Hour(
+                    new Date((weather.data.dt + weather.data.timezone) * 1000)
+                      .toUTCString()
+                      .substring(17, 19)
+                  ).slice(2)
                 : new Date((weather.data.dt + weather.data.timezone) * 1000)
                     .toUTCString()
                     .substring(17, 20) + minutes}

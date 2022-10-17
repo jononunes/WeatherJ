@@ -12,6 +12,9 @@ export default function Sidebar({
   switchMode,
   modeChecked,
   changeMode,
+  switchTime,
+  timeChecked,
+  changeTime,
   favourites,
   setLat,
   setLon,
@@ -108,8 +111,18 @@ export default function Sidebar({
                   ></div>
                 </div>
 
-                <div className={s.checkbox_toggle} id={s.time_cb}>
-                  <input type="checkbox" className={s.checkbox} />
+                <div
+                  className={s.checkbox_toggle}
+                  id={s.time_cb}
+                  onClick={switchTime}
+                >
+                  <input
+                    type="checkbox"
+                    className={s.checkbox}
+                    checked={timeChecked}
+                    onClick={changeTime}
+                    readOnly
+                  />
                   <div className={s.knobs}></div>
                   <div
                     className={`${s.layer} ${modeChecked && s.layerNight}`}

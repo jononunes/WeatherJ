@@ -11,8 +11,10 @@ const Home = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [unit, setUnit] = useState("metric");
   const [mode, setMode] = useState("Day");
+  const [time, setTime] = useState("24H");
   const [tempChecked, setTempChecked] = useState(false);
   const [modeChecked, setModeChecked] = useState(false);
+  const [timeChecked, setTimeChecked] = useState(false);
   const [lon, setLon] = useState("28.041638888");
   const [lat, setLat] = useState("-26.204361111");
 
@@ -40,12 +42,26 @@ const Home = () => {
     }
   };
 
+  const switchTime = () => {
+    if (time === "24H") {
+      setTime("12H");
+      localStorage.setItem("Time", "12H");
+    } else {
+      setTime("24H");
+      localStorage.setItem("Time", "24H");
+    }
+  };
+
   const changeTemp = () => {
     setTempChecked(!tempChecked);
   };
 
   const changeMode = () => {
     setModeChecked(!modeChecked);
+  };
+
+  const changeTime = () => {
+    setTimeChecked(!timeChecked);
   };
 
   useEffect(() => {
@@ -61,7 +77,7 @@ const Home = () => {
       localStorage.setItem("Favourites", JSON.stringify(cities));
       localStorage.setItem("Mode", "Day");
       localStorage.setItem("Units", "metric");
-      localStorage.setItem("Time", "12H");
+      localStorage.setItem("Time", "24H");
       setFavourites(JSON.parse(localStorage.getItem("Favourites")));
     } else {
       setFavourites(JSON.parse(localStorage.getItem("Favourites")));
@@ -82,6 +98,14 @@ const Home = () => {
       setMode("Night");
       setModeChecked(true);
     }
+
+    if (localStorage.getItem("Time") === "24H") {
+      setTime("24H");
+      setTimeChecked(false);
+    } else {
+      setTime("12H");
+      setTimeChecked(true);
+    }
   }, []);
 
   useEffect(() => {
@@ -101,6 +125,9 @@ const Home = () => {
         switchMode={switchMode}
         modeChecked={modeChecked}
         changeMode={changeMode}
+        switchTime={switchTime}
+        timeChecked={timeChecked}
+        changeTime={changeTime}
         favourites={favourites}
         setLat={setLat}
         setLon={setLon}
@@ -112,6 +139,9 @@ const Home = () => {
         switchMode={switchMode}
         modeChecked={modeChecked}
         changeMode={changeMode}
+        switchTime={switchTime}
+        timeChecked={timeChecked}
+        changeTime={changeTime}
         favourites={favourites}
         setLat={setLat}
         setLon={setLon}
@@ -126,6 +156,7 @@ const Home = () => {
         lat={lat}
         setLat={setLat}
         modeChecked={modeChecked}
+        timeChecked={timeChecked}
       />
     </div>
   );

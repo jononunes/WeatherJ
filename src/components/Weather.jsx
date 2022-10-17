@@ -115,7 +115,7 @@ export default function Weather({
     setFavourites((favourites) => [
       ...favourites,
       {
-        id: favourites.length + 1,
+        id: favourites[favourites.length - 1].id + 1,
         text: search.label.substring(0, search.label.indexOf(",")),
         country: search.label.substring(search.label.indexOf(",") + 1),
         value: search.value,
@@ -131,13 +131,12 @@ export default function Weather({
   };
 
   function convert12Hour(time) {
-    let dt = new Date();
     let newHours = 0;
 
     if (parseInt(time) > 12) {
       newHours = parseInt(time) % 12;
 
-      return newHours.toString() + "PM";
+      return newHours.toString() + " PM";
     } else {
       return time + "AM";
     }

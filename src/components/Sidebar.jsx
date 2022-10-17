@@ -19,8 +19,8 @@ export default function Sidebar({
   setLat,
   setLon,
 }) {
-  const changeCity = (text) => {
-    const index = favourites.findIndex((x) => x.text === text);
+  const changeCity = (id) => {
+    const index = favourites.findIndex((x) => x.id === id);
     const [latitude, longitude] = favourites[index].value.split(" ");
     setLat(latitude);
     setLon(longitude);
@@ -58,7 +58,7 @@ export default function Sidebar({
                 <li
                   key={index}
                   className={`${s.linksLi} ${modeChecked && s.headingNight}`}
-                  onClick={() => changeCity(val.text)}
+                  onClick={() => changeCity(val.id)}
                 >
                   <a href="#">
                     <GoLocation />

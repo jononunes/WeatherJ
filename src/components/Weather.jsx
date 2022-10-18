@@ -94,7 +94,7 @@ export default function Weather({
 
   const loadOptions = (inputValue) => {
     return fetch(
-      `${GEO_API_URL}/cities?minPopulation=17000&namePrefix=${inputValue}`,
+      `${GEO_API_URL}/cities?minPopulation=50000&namePrefix=${inputValue}`,
       geoApiOptions
     )
       .then((response) => response.json())
@@ -135,8 +135,11 @@ export default function Weather({
 
     if (parseInt(time) > 12) {
       newHours = parseInt(time) % 12;
-
-      return newHours.toString() + " PM";
+      if (newHours >= 10) {
+        return newHours.toString() + "PM";
+      } else {
+        return "0" + newHours.toString() + "PM";
+      }
     } else {
       return time + "AM";
     }
@@ -513,7 +516,7 @@ export default function Weather({
             <img src="/searchIcon.png" alt="" className={s.searchIcon} />
             <AsyncPaginate
               placeholder="Search location..."
-              debounceTimeout={700}
+              debounceTimeout={1500}
               value="Search location..."
               onChange={handleOnChange}
               className={s.searchBar}

@@ -35,8 +35,8 @@ export default function Weather({
   setLon,
   lat,
   setLat,
-  modeChecked,
-  timeChecked,
+  mode,
+  time,
 }) {
   const [daily, setDaily] = useState(true);
 
@@ -130,18 +130,18 @@ export default function Weather({
     setFavourites((updatedFavourites) => [...updatedFavourites]);
   };
 
-  function convert12Hour(time) {
+  function convert12Hour(timeValue) {
     let newHours = 0;
 
-    if (parseInt(time) > 12) {
-      newHours = parseInt(time) % 12;
+    if (parseInt(timeValue) > 12) {
+      newHours = parseInt(timeValue) % 12;
       if (newHours >= 10) {
         return newHours.toString() + "PM";
       } else {
         return "0" + newHours.toString() + "PM";
       }
     } else {
-      return time + "AM";
+      return timeValue + "AM";
     }
   }
 
@@ -186,7 +186,7 @@ export default function Weather({
         ? weekday[d.getDay()].substring(0, 3)
         : loadingForecast || isLoading
         ? ""
-        : timeChecked
+        : time === "12H"
         ? convert12Hour(
             new Date(
               (forecastData.data.list[0].dt + weather.data.timezone) * 1000
@@ -218,7 +218,7 @@ export default function Weather({
           : weekday[d.getDay() - 7 + 1].substring(0, 3)
         : loadingForecast || isLoading
         ? ""
-        : timeChecked
+        : time === "12H"
         ? convert12Hour(
             new Date(
               (forecastData.data.list[1].dt + weather.data.timezone) * 1000
@@ -269,7 +269,7 @@ export default function Weather({
           : weekday[d.getDay() - 7 + 2].substring(0, 3)
         : loadingForecast || isLoading
         ? ""
-        : timeChecked
+        : time === "12H"
         ? convert12Hour(
             new Date(
               (forecastData.data.list[2].dt + weather.data.timezone) * 1000
@@ -320,7 +320,7 @@ export default function Weather({
           : weekday[d.getDay() - 7 + 3].substring(0, 3)
         : loadingForecast || isLoading
         ? ""
-        : timeChecked
+        : time === "12H"
         ? convert12Hour(
             new Date(
               (forecastData.data.list[3].dt + weather.data.timezone) * 1000
@@ -371,7 +371,7 @@ export default function Weather({
           : weekday[d.getDay() - 7 + 4].substring(0, 3)
         : loadingForecast || isLoading
         ? ""
-        : timeChecked
+        : time === "12H"
         ? convert12Hour(
             new Date(
               (forecastData.data.list[4].dt + weather.data.timezone) * 1000
@@ -576,7 +576,7 @@ export default function Weather({
             <p className={s.time}>
               {isLoading
                 ? ""
-                : timeChecked
+                : time === "12H"
                 ? convert12Hour(
                     new Date((weather.data.dt + weather.data.timezone) * 1000)
                       .toUTCString()
@@ -641,17 +641,23 @@ export default function Weather({
           ></video>
           <div className={s.menu}>
             <div className={s.columns}>
-              <div className={`${s.leftCard} ${modeChecked && s.cardNight}`}>
+              <div
+                className={`${s.leftCard} ${mode === "Night" && s.cardNight}`}
+              >
                 <div className={s.detail}>
                   <div className={s.title}>
                     <img src="/hilow.png" alt="" className={s.detailIcon} />
                     <h1
-                      className={`${s.category} ${modeChecked && s.textNight}`}
+                      className={`${s.category} ${
+                        mode === "Night" && s.textNight
+                      }`}
                     >
                       Min/Max
                     </h1>
                   </div>
-                  <p className={`${s.value} ${modeChecked && s.textNight}`}>
+                  <p
+                    className={`${s.value} ${mode === "Night" && s.textNight}`}
+                  >
                     {isLoading
                       ? ""
                       : weather.data.main.temp_min
@@ -671,12 +677,16 @@ export default function Weather({
                   <div className={s.title}>
                     <img src="/feelslike.png" alt="" className={s.detailIcon} />
                     <h1
-                      className={`${s.category} ${modeChecked && s.textNight}`}
+                      className={`${s.category} ${
+                        mode === "Night" && s.textNight
+                      }`}
                     >
                       Feels Like
                     </h1>
                   </div>
-                  <p className={`${s.value} ${modeChecked && s.textNight}`}>
+                  <p
+                    className={`${s.value} ${mode === "Night" && s.textNight}`}
+                  >
                     {isLoading
                       ? ""
                       : weather.data.main.feels_like
@@ -691,12 +701,16 @@ export default function Weather({
                   <div className={s.title}>
                     <img src="/pressure.png" alt="" className={s.detailIcon} />
                     <h1
-                      className={`${s.category} ${modeChecked && s.textNight}`}
+                      className={`${s.category} ${
+                        mode === "Night" && s.textNight
+                      }`}
                     >
                       Pressure
                     </h1>
                   </div>
-                  <p className={`${s.value} ${modeChecked && s.textNight}`}>
+                  <p
+                    className={`${s.value} ${mode === "Night" && s.textNight}`}
+                  >
                     {isLoading ? "" : weather.data.main.pressure}mb
                   </p>
                 </div>
@@ -705,12 +719,16 @@ export default function Weather({
                   <div className={s.title}>
                     <img src="/humidity.png" alt="" className={s.detailIcon} />
                     <h1
-                      className={`${s.category} ${modeChecked && s.textNight}`}
+                      className={`${s.category} ${
+                        mode === "Night" && s.textNight
+                      }`}
                     >
                       Humidity
                     </h1>
                   </div>
-                  <p className={`${s.value} ${modeChecked && s.textNight}`}>
+                  <p
+                    className={`${s.value} ${mode === "Night" && s.textNight}`}
+                  >
                     {isLoading ? "" : weather.data.main.humidity}%
                   </p>
                 </div>
@@ -723,29 +741,39 @@ export default function Weather({
                       className={s.detailIcon}
                     />
                     <h1
-                      className={`${s.category} ${modeChecked && s.textNight}`}
+                      className={`${s.category} ${
+                        mode === "Night" && s.textNight
+                      }`}
                     >
                       Visibility
                     </h1>
                   </div>
-                  <p className={`${s.value} ${modeChecked && s.textNight}`}>
+                  <p
+                    className={`${s.value} ${mode === "Night" && s.textNight}`}
+                  >
                     {isLoading ? "" : weather.data.visibility}km
                   </p>
                 </div>
               </div>
               <div className={s.rightCards}>
-                <div className={`${s.rightCard} ${modeChecked && s.cardNight}`}>
+                <div
+                  className={`${s.rightCard} ${
+                    mode === "Night" && s.cardNight
+                  }`}
+                >
                   <div className={s.cardColumns}>
                     <div className={s.sunriseColumn}>
                       <h1
                         className={`${s.cardHeading} ${
-                          modeChecked && s.textNight
+                          mode === "Night" && s.textNight
                         }`}
                       >
                         Sunrise
                       </h1>
                       <p
-                        className={`${s.sunTime} ${modeChecked && s.textNight}`}
+                        className={`${s.sunTime} ${
+                          mode === "Night" && s.textNight
+                        }`}
                       >
                         {isLoading
                           ? ""
@@ -762,13 +790,15 @@ export default function Weather({
                     <div className={s.sunriseColumn}>
                       <h1
                         className={`${s.cardHeading} ${
-                          modeChecked && s.textNight
+                          mode === "Night" && s.textNight
                         }`}
                       >
                         Sunset
                       </h1>
                       <p
-                        className={`${s.sunTime} ${modeChecked && s.textNight}`}
+                        className={`${s.sunTime} ${
+                          mode === "Night" && s.textNight
+                        }`}
                       >
                         {isLoading
                           ? ""
@@ -784,11 +814,15 @@ export default function Weather({
                     </div>
                   </div>
                 </div>
-                <div className={`${s.rightCard} ${modeChecked && s.cardNight}`}>
+                <div
+                  className={`${s.rightCard} ${
+                    mode === "Night" && s.cardNight
+                  }`}
+                >
                   <div className={s.menuCardTitle}>
                     <h1
                       className={`${s.cardHeading} ${
-                        modeChecked && s.textNight
+                        mode === "Night" && s.textNight
                       }`}
                     >
                       Wind
@@ -804,14 +838,14 @@ export default function Weather({
                       <img src="/windspeed.png" alt="" className={s.windIcon} />
                       <h1
                         className={`${s.windHeading} ${
-                          modeChecked && s.textNight
+                          mode === "Night" && s.textNight
                         }`}
                       >
                         Speed
                       </h1>
                       <p
                         className={`${s.windValue} ${
-                          modeChecked && s.textNight
+                          mode === "Night" && s.textNight
                         }`}
                       >
                         {isLoading ? "" : weather.data.wind.speed}km/h
@@ -825,14 +859,14 @@ export default function Weather({
                       />
                       <h1
                         className={`${s.windHeading} ${
-                          modeChecked && s.textNight
+                          mode === "Night" && s.textNight
                         }`}
                       >
                         Direction
                       </h1>
                       <p
                         className={`${s.windValue} ${
-                          modeChecked && s.textNight
+                          mode === "Night" && s.textNight
                         }`}
                       >
                         {isLoading ? "" : weather.data.wind.deg}°
@@ -842,14 +876,14 @@ export default function Weather({
                       <img src="/windgusts.png" alt="" className={s.windIcon} />
                       <h1
                         className={`${s.windHeading} ${
-                          modeChecked && s.textNight
+                          mode === "Night" && s.textNight
                         }`}
                       >
                         Gust
                       </h1>
                       <p
                         className={`${s.windValue} ${
-                          modeChecked && s.textNight
+                          mode === "Night" && s.textNight
                         }`}
                       >
                         {isLoading ? "" : weather.data.wind.speed}km/h
@@ -857,11 +891,15 @@ export default function Weather({
                     </div>
                   </div>
                 </div>
-                <div className={`${s.rightCard} ${modeChecked && s.cardNight}`}>
+                <div
+                  className={`${s.rightCard} ${
+                    mode === "Night" && s.cardNight
+                  }`}
+                >
                   <div className={s.menuCardTitle}>
                     <h1
                       className={`${s.cardHeading} ${
-                        modeChecked && s.textNight
+                        mode === "Night" && s.textNight
                       }`}
                     >
                       UV Index

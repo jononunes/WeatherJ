@@ -9,14 +9,13 @@ const Home = () => {
     { id: 1, text: "", country: "", value: 0 },
   ]);
   const [isOpen, setIsOpen] = useState(false);
+
   const [unit, setUnit] = useState("metric");
   const [mode, setMode] = useState("Day");
   const [time, setTime] = useState("24H");
-  const [tempChecked, setTempChecked] = useState(false);
-  const [modeChecked, setModeChecked] = useState(false);
-  const [timeChecked, setTimeChecked] = useState(false);
-  const [lon, setLon] = useState("28.041638888");
-  const [lat, setLat] = useState("-26.204361111");
+
+  const [lon, setLon] = useState("");
+  const [lat, setLat] = useState("");
 
   const toggle = () => {
     setIsOpen(!isOpen);
@@ -52,18 +51,6 @@ const Home = () => {
     }
   };
 
-  const changeTemp = () => {
-    setTempChecked(!tempChecked);
-  };
-
-  const changeMode = () => {
-    setModeChecked(!modeChecked);
-  };
-
-  const changeTime = () => {
-    setTimeChecked(!timeChecked);
-  };
-
   useEffect(() => {
     if (localStorage.getItem("Favourites") === null) {
       const cities = [
@@ -85,26 +72,20 @@ const Home = () => {
 
     if (localStorage.getItem("Units") === "metric") {
       setUnit("metric");
-      setTempChecked(false);
     } else {
       setUnit("imperial");
-      setTempChecked(true);
     }
 
     if (localStorage.getItem("Mode") === "Day") {
       setMode("Day");
-      setModeChecked(false);
     } else {
       setMode("Night");
-      setModeChecked(true);
     }
 
     if (localStorage.getItem("Time") === "24H") {
       setTime("24H");
-      setTimeChecked(false);
     } else {
       setTime("12H");
-      setTimeChecked(true);
     }
   }, []);
 
@@ -120,28 +101,23 @@ const Home = () => {
         isOpen={isOpen}
         toggle={toggle}
         switchUnit={switchUnit}
-        tempChecked={tempChecked}
-        changeTemp={changeTemp}
+        unit={unit}
         switchMode={switchMode}
-        modeChecked={modeChecked}
-        changeMode={changeMode}
+        mode={mode}
         switchTime={switchTime}
-        timeChecked={timeChecked}
-        changeTime={changeTime}
+        time={time}
         favourites={favourites}
         setLat={setLat}
         setLon={setLon}
       />
       <Sidebar
+        isOpen={isOpen}
         switchUnit={switchUnit}
-        tempChecked={tempChecked}
-        changeTemp={changeTemp}
+        unit={unit}
         switchMode={switchMode}
-        modeChecked={modeChecked}
-        changeMode={changeMode}
+        mode={mode}
         switchTime={switchTime}
-        timeChecked={timeChecked}
-        changeTime={changeTime}
+        time={time}
         favourites={favourites}
         setLat={setLat}
         setLon={setLon}
@@ -155,8 +131,8 @@ const Home = () => {
         setLon={setLon}
         lat={lat}
         setLat={setLat}
-        modeChecked={modeChecked}
-        timeChecked={timeChecked}
+        mode={mode}
+        time={time}
       />
     </div>
   );

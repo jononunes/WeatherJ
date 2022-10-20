@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { GoLocation, GoSettings } from "react-icons/go";
 import { FaRegStar } from "react-icons/fa";
 import Image from "next/image";
@@ -7,14 +6,11 @@ import s from "../styles/sidebar.module.scss";
 
 export default function Sidebar({
   switchUnit,
-  tempChecked,
-  changeTemp,
+  unit,
   switchMode,
-  modeChecked,
-  changeMode,
+  mode,
   switchTime,
-  timeChecked,
-  changeTime,
+  time,
   favourites,
   setLat,
   setLon,
@@ -29,7 +25,7 @@ export default function Sidebar({
   return (
     <div>
       <section
-        className={`${s.sidebarSection} ${modeChecked && s.sectionNight}`}
+        className={`${s.sidebarSection} ${mode === "Night" && s.sectionNight}`}
       >
         <div className={s.top}>
           <div className={s.brand}>
@@ -48,7 +44,7 @@ export default function Sidebar({
             <ul className={s.linksUl}>
               <div
                 className={`${s.favouritesHeading} ${
-                  modeChecked && s.headingNight
+                  mode === "Night" && s.headingNight
                 }`}
               >
                 <span>Favourite Locations</span>
@@ -57,10 +53,12 @@ export default function Sidebar({
               {favourites.map((val, index) => (
                 <li
                   key={index}
-                  className={`${s.linksLi} ${modeChecked && s.headingNight}`}
+                  className={`${s.linksLi} ${
+                    mode === "Night" && s.headingNight
+                  }`}
                   onClick={() => changeCity(val.id)}
                 >
-                  <a href="#">
+                  <a>
                     <GoLocation />
                     <span>{val.text}</span>
                   </a>
@@ -68,7 +66,7 @@ export default function Sidebar({
               ))}
               <div
                 className={`${s.preferencesHeading} ${
-                  modeChecked && s.headingNight
+                  mode === "Night" && s.headingNight
                 }`}
               >
                 <span>Preferences</span>
@@ -83,13 +81,12 @@ export default function Sidebar({
                   <input
                     type="checkbox"
                     className={s.checkbox}
-                    checked={modeChecked}
-                    onClick={changeMode}
+                    checked={mode === "Day" ? false : true}
                     readOnly
                   />
                   <div className={s.knobs}></div>
                   <div
-                    className={`${s.layer} ${modeChecked && s.layerNight}`}
+                    className={`${s.layer} ${mode === "Night" && s.layerNight}`}
                   ></div>
                 </div>
 
@@ -101,13 +98,12 @@ export default function Sidebar({
                   <input
                     type="checkbox"
                     className={s.checkbox}
-                    checked={tempChecked}
-                    onClick={changeTemp}
+                    checked={unit === "metric" ? false : true}
                     readOnly
                   />
                   <div className={s.knobs}></div>
                   <div
-                    className={`${s.layer} ${modeChecked && s.layerNight}`}
+                    className={`${s.layer} ${mode === "Night" && s.layerNight}`}
                   ></div>
                 </div>
 
@@ -119,13 +115,12 @@ export default function Sidebar({
                   <input
                     type="checkbox"
                     className={s.checkbox}
-                    checked={timeChecked}
-                    onClick={changeTime}
+                    checked={time === "24H" ? false : true}
                     readOnly
                   />
                   <div className={s.knobs}></div>
                   <div
-                    className={`${s.layer} ${modeChecked && s.layerNight}`}
+                    className={`${s.layer} ${mode === "Night" && s.layerNight}`}
                   ></div>
                 </div>
               </div>

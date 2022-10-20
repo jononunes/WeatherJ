@@ -1,4 +1,3 @@
-import { useState, useEffect } from "react";
 import { GoLocation, GoSettings } from "react-icons/go";
 import { FaRegStar, FaTimes } from "react-icons/fa";
 import Image from "next/image";
@@ -9,14 +8,11 @@ export default function MobileSidebar({
   isOpen,
   toggle,
   switchUnit,
-  tempChecked,
-  changeTemp,
+  unit,
   switchMode,
-  modeChecked,
-  changeMode,
+  mode,
   switchTime,
-  timeChecked,
-  changeTime,
+  time,
   favourites,
   setLat,
   setLon,
@@ -32,7 +28,7 @@ export default function MobileSidebar({
     <div>
       <aside
         className={`${s.sidebarSection} ${isOpen && s.sidebarOpen} ${
-          modeChecked && s.sectionNight
+          mode === "Night" && s.sectionNight
         }`}
       >
         <div className={s.top}>
@@ -56,7 +52,7 @@ export default function MobileSidebar({
             <ul className={s.linksUl}>
               <div
                 className={`${s.favouritesHeading} ${
-                  modeChecked && s.headingNight
+                  mode === "Night" && s.headingNight
                 }`}
               >
                 <span>Favourite Locations</span>
@@ -65,7 +61,9 @@ export default function MobileSidebar({
               {favourites.map((val, index) => (
                 <li
                   key={index}
-                  className={`${s.linksLi} ${modeChecked && s.headingNight}`}
+                  className={`${s.linksLi} ${
+                    mode === "Night" && s.headingNight
+                  }`}
                   onClick={() => changeCity(val.text)}
                 >
                   <a href="#">
@@ -76,7 +74,7 @@ export default function MobileSidebar({
               ))}
               <div
                 className={`${s.preferencesHeading} ${
-                  modeChecked && s.headingNight
+                  mode === "Night" && s.headingNight
                 }`}
               >
                 <span>Preferences</span>
@@ -91,13 +89,12 @@ export default function MobileSidebar({
                   <input
                     type="checkbox"
                     className={s.checkbox}
-                    checked={modeChecked}
-                    onClick={changeMode}
+                    checked={mode === "Day" ? false : true}
                     readOnly
                   />
                   <div className={s.knobs}></div>
                   <div
-                    className={`${s.layer} ${modeChecked && s.layerNight}`}
+                    className={`${s.layer} ${mode === "Night" && s.layerNight}`}
                   ></div>
                 </div>
 
@@ -109,13 +106,12 @@ export default function MobileSidebar({
                   <input
                     type="checkbox"
                     className={s.checkbox}
-                    checked={tempChecked}
-                    onClick={changeTemp}
+                    checked={unit === "metric" ? false : true}
                     readOnly
                   />
                   <div className={s.knobs}></div>
                   <div
-                    className={`${s.layer} ${modeChecked && s.layerNight}`}
+                    className={`${s.layer} ${mode === "Night" && s.layerNight}`}
                   ></div>
                 </div>
 
@@ -127,13 +123,12 @@ export default function MobileSidebar({
                   <input
                     type="checkbox"
                     className={s.checkbox}
-                    checked={timeChecked}
-                    onClick={changeTime}
+                    checked={time === "24H" ? false : true}
                     readOnly
                   />
                   <div className={s.knobs}></div>
                   <div
-                    className={`${s.layer} ${modeChecked && s.layerNight}`}
+                    className={`${s.layer} ${mode === "Night" && s.layerNight}`}
                   ></div>
                 </div>
               </div>

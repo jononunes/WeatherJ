@@ -99,23 +99,17 @@ const Home = () => {
       <MobileSidebar
         isOpen={isOpen}
         toggle={toggle}
-        switchUnit={switchUnit}
-        unit={unit}
-        switchMode={switchMode}
-        mode={mode}
-        switchTime={switchTime}
-        time={time}
+        unitControl={{ unit: unit, switchUnit: switchUnit }}
+        modeControl={{ mode: mode, switchMode: switchMode }}
+        timeControl={{ time: time, switchTime: switchTime }}
         favourites={favourites}
         setCoords={setCoords}
       />
       <Sidebar
         isOpen={isOpen}
-        switchUnit={switchUnit}
-        unit={unit}
-        switchMode={switchMode}
-        mode={mode}
-        switchTime={switchTime}
-        time={time}
+        unitControl={{ unit: unit, switchUnit: switchUnit }}
+        modeControl={{ mode: mode, switchMode: switchMode }}
+        timeControl={{ time: time, switchTime: switchTime }}
         favourites={favourites}
         setCoords={setCoords}
       />

@@ -7,12 +7,9 @@ import s from "../styles/mobileSidebar.module.scss";
 export default function MobileSidebar({
   isOpen,
   toggle,
-  switchUnit,
-  unit,
-  switchMode,
-  mode,
-  switchTime,
-  time,
+  unitControl,
+  modeControl,
+  timeControl,
   favourites,
   setCoords,
 }) {
@@ -26,7 +23,7 @@ export default function MobileSidebar({
     <div>
       <aside
         className={`${s.sidebarSection} ${isOpen && s.sidebarOpen} ${
-          mode === "Night" && s.sectionNight
+          modeControl.mode === "Night" && s.sectionNight
         }`}
       >
         <div className={s.top}>
@@ -50,7 +47,7 @@ export default function MobileSidebar({
             <ul className={s.linksUl}>
               <div
                 className={`${s.favouritesHeading} ${
-                  mode === "Night" && s.headingNight
+                  modeControl.mode === "Night" && s.headingNight
                 }`}
               >
                 <span>Favourite Locations</span>
@@ -60,7 +57,7 @@ export default function MobileSidebar({
                 <li
                   key={index}
                   className={`${s.linksLi} ${
-                    mode === "Night" && s.headingNight
+                    modeControl.mode === "Night" && s.headingNight
                   }`}
                   onClick={() => changeCity(val.text)}
                 >
@@ -72,7 +69,7 @@ export default function MobileSidebar({
               ))}
               <div
                 className={`${s.preferencesHeading} ${
-                  mode === "Night" && s.headingNight
+                  modeControl.mode === "Night" && s.headingNight
                 }`}
               >
                 <span>Preferences</span>
@@ -82,51 +79,57 @@ export default function MobileSidebar({
                 <div
                   className={s.checkbox_toggle}
                   id={s.dn_cb}
-                  onClick={switchMode}
+                  onClick={modeControl.switchMode}
                 >
                   <input
                     type="checkbox"
                     className={s.checkbox}
-                    checked={mode === "Day" ? false : true}
+                    checked={modeControl.mode === "Day" ? false : true}
                     readOnly
                   />
                   <div className={s.knobs}></div>
                   <div
-                    className={`${s.layer} ${mode === "Night" && s.layerNight}`}
+                    className={`${s.layer} ${
+                      modeControl.mode === "Night" && s.layerNight
+                    }`}
                   ></div>
                 </div>
 
                 <div
                   className={s.checkbox_toggle}
                   id={s.temp_cb}
-                  onClick={switchUnit}
+                  onClick={unitControl.switchUnit}
                 >
                   <input
                     type="checkbox"
                     className={s.checkbox}
-                    checked={unit === "metric" ? false : true}
+                    checked={unitControl.unit === "metric" ? false : true}
                     readOnly
                   />
                   <div className={s.knobs}></div>
                   <div
-                    className={`${s.layer} ${mode === "Night" && s.layerNight}`}
+                    className={`${s.layer} ${
+                      modeControl.mode === "Night" && s.layerNight
+                    }`}
                   ></div>
                 </div>
 
                 <div
                   className={s.checkbox_toggle}
                   id={s.time_cb}
-                  onClick={switchTime}
+                  onClick={timeControl.switchTime}
                 >
                   <input
                     type="checkbox"
                     className={s.checkbox}
-                    checked={time === "24H" ? false : true}
+                    checked={timeControl.time === "24H" ? false : true}
                     readOnly
                   />
                   <div className={s.knobs}></div>
                   <div
-                    className={`${s.layer} ${mode === "Night" && s.layerNight}`}
+                    className={`${s.layer} ${
+                      modeControl.mode === "Night" && s.layerNight
+                    }`}
                   ></div>
                 </div>
               </div>

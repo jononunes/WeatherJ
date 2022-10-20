@@ -12,14 +12,12 @@ export default function Sidebar({
   switchTime,
   time,
   favourites,
-  setLat,
-  setLon,
+  setCoords,
 }) {
   const changeCity = (id) => {
     const index = favourites.findIndex((x) => x.id === id);
     const [latitude, longitude] = favourites[index].value.split(" ");
-    setLat(latitude);
-    setLon(longitude);
+    setCoords({ lat: latitude, lon: longitude });
   };
 
   return (

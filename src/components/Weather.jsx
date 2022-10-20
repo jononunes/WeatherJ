@@ -31,10 +31,8 @@ export default function Weather({
   unit,
   favourites,
   setFavourites,
-  lon,
-  setLon,
-  lat,
-  setLat,
+  coords,
+  setCoords,
   mode,
   time,
 }) {
@@ -52,12 +50,12 @@ export default function Weather({
     isSuccess,
     error,
   } = useQuery(
-    ["fetchWeather", { lat: lat, lon: lon, unit: unit }],
+    ["fetchWeather", { lat: coords.lat, lon: coords.lon, unit: unit }],
     fetchWeather
   );
 
   const { isLoading: loadingForecast, data: forecastData } = useQuery(
-    ["fetchForecast", { lat: lat, lon: lon, unit: unit }],
+    ["fetchForecast", { lat: coords.lat, lon: coords.lon, unit: unit }],
     fetchForecast
   );
 
@@ -66,27 +64,27 @@ export default function Weather({
       const [latitude, longitude] = JSON.parse(
         localStorage.getItem("Favourites")
       )[0].value.split(" ");
-      setLat(latitude);
-      setLon(longitude);
+      setCoords({ lat: latitude, lon: longitude });
     }, 1000);
   }, []);
 
   const handleOnChange = (searchData) => {
     setSearch(searchData);
     const [latitude, longitude] = searchData.value.split(" ");
-    setLat(latitude);
-    setLon(longitude);
+    setCoords({ lat: latitude, lon: longitude });
   };
 
   useEffect(() => {
-    const index = favourites.findIndex((x) => x.value == `${lat} ${lon}`);
+    const index = favourites.findIndex(
+      (x) => x.value == `${coords.lat} ${coords.lon}`
+    );
     if (index != -1) {
       setSearch({
-        value: lat.toString() + " " + lon.toString(),
+        value: coords.lat.toString() + " " + coords.lon.toString(),
         label: favourites[index].text + ", " + favourites[index].country,
       });
     }
-  }, [lat, lon]);
+  }, [coords]);
 
   const changeTab = () => {
     setDaily(!daily);

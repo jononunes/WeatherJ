@@ -14,14 +14,12 @@ export default function MobileSidebar({
   switchTime,
   time,
   favourites,
-  setLat,
-  setLon,
+  setCoords,
 }) {
   const changeCity = (text) => {
     const index = favourites.findIndex((x) => x.text === text);
     const [latitude, longitude] = favourites[index].value.split(" ");
-    setLat(latitude);
-    setLon(longitude);
+    setCoords({ lat: latitude, lon: longitude });
   };
 
   return (

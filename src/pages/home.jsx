@@ -14,8 +14,7 @@ const Home = () => {
   const [mode, setMode] = useState("Day");
   const [time, setTime] = useState("24H");
 
-  const [lon, setLon] = useState("");
-  const [lat, setLat] = useState("");
+  const [coords, setCoords] = useState({ lat: "", lon: "" });
 
   const toggle = () => {
     setIsOpen(!isOpen);
@@ -107,8 +106,7 @@ const Home = () => {
         switchTime={switchTime}
         time={time}
         favourites={favourites}
-        setLat={setLat}
-        setLon={setLon}
+        setCoords={setCoords}
       />
       <Sidebar
         isOpen={isOpen}
@@ -119,18 +117,15 @@ const Home = () => {
         switchTime={switchTime}
         time={time}
         favourites={favourites}
-        setLat={setLat}
-        setLon={setLon}
+        setCoords={setCoords}
       />
       <Weather
         toggle={toggle}
         unit={unit}
         favourites={favourites}
         setFavourites={setFavourites}
-        lon={lon}
-        setLon={setLon}
-        lat={lat}
-        setLat={setLat}
+        coords={coords}
+        setCoords={setCoords}
         mode={mode}
         time={time}
       />

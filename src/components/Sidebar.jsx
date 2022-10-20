@@ -1,42 +1,48 @@
 import { GoLocation, GoSettings } from "react-icons/go";
-import { FaRegStar } from "react-icons/fa";
+import { FaRegStar, FaTimes } from "react-icons/fa";
 import Image from "next/image";
 
 import s from "../styles/sidebar.module.scss";
 
 export default function Sidebar({
+  isOpen,
+  toggle,
   unitControl,
   modeControl,
   timeControl,
   favourites,
   setCoords,
 }) {
-  const changeCity = (id) => {
-    const index = favourites.findIndex((x) => x.id === id);
+  const changeCity = (text) => {
+    const index = favourites.findIndex((x) => x.text === text);
     const [latitude, longitude] = favourites[index].value.split(" ");
     setCoords({ lat: latitude, lon: longitude });
   };
 
   return (
     <div>
-      <section
-        className={`${s.sidebarSection} ${
+      <aside
+        className={`${s.sidebarSection} ${isOpen && s.sidebarOpen} ${
           modeControl.mode === "Night" && s.sectionNight
         }`}
       >
         <div className={s.top}>
           <div className={s.brand}>
-            <Image
-              src="/logo.png"
-              alt="logo"
-              width="100rem"
-              height="50rem"
-              objectFit="contain"
-              className={s.logo}
-            />
-            <span className={s.logoText}>WeatherJ</span>
+            <div className={s.title}>
+              <img
+                src="/logo.png"
+                alt="logo"
+                // width="150rem"
+                // height="100rem"
+                // objectFit="contain"
+                className={s.logo}
+              />
+              <span className={s.logoText}>WeatherJ</span>
+            </div>
+            <div className={s.closeIconContainer} onClick={toggle}>
+              <FaTimes size={50} className={s.closeIcon} />
+            </div>
           </div>
-          <div className={s.menu}></div>
           <div className={s.links}>
             <ul className={s.linksUl}>
               <div
@@ -53,9 +59,9 @@ export default function Sidebar({
                   className={`${s.linksLi} ${
                     modeControl.mode === "Night" && s.headingNight
                   }`}
-                  onClick={() => changeCity(val.id)}
+                  onClick={() => changeCity(val.text)}
                 >
-                  <a>
+                  <a href="#">
                     <GoLocation />
                     <span>{val.text}</span>
                   </a>
@@ -130,7 +136,7 @@ export default function Sidebar({
             </ul>
           </div>
         </div>
-      </section>
+      </aside>
     </div>
   );
 }

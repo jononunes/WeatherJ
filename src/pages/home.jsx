@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 
 import Weather from "../components/Weather";
-import MobileSidebar from "../components/MobileSidebar";
 import Sidebar from "../components/Sidebar";
 
 const Home = () => {
@@ -91,6 +90,12 @@ const Home = () => {
     } else {
       setTime("12H");
     }
+
+    if (typeof window !== "undefined") {
+      if (window.innerWidth >= 1080) {
+        setIsOpen(true);
+      }
+    }
   }, []);
 
   useEffect(() => {
@@ -101,17 +106,9 @@ const Home = () => {
 
   return (
     <div>
-      <MobileSidebar
-        isOpen={isOpen}
-        toggle={toggle}
-        unitControl={{ unit: unit, switchUnit: switchUnit }}
-        modeControl={{ mode: mode, switchMode: switchMode }}
-        timeControl={{ time: time, switchTime: switchTime }}
-        favourites={favourites}
-        setCoords={setCoords}
-      />
       <Sidebar
         isOpen={isOpen}
+        toggle={toggle}
         unitControl={{ unit: unit, switchUnit: switchUnit }}
         modeControl={{ mode: mode, switchMode: switchMode }}
         timeControl={{ time: time, switchTime: switchTime }}

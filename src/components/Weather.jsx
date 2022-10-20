@@ -10,7 +10,16 @@ import { useQuery } from "react-query";
 import axios from "axios";
 
 import s from "../styles/weather.module.scss";
-import { GEO_API_URL, geoApiOptions } from "../pages/api/cities/getCities";
+
+const geoApiOptions = {
+  method: "GET",
+  headers: {
+    "X-RapidAPI-Key": "b832b0cddbmsh9ef15291e3fa337p198943jsnbadba3041847",
+    "X-RapidAPI-Host": "wft-geo-db.p.rapidapi.com",
+  },
+};
+
+const GEO_API_URL = "https://wft-geo-db.p.rapidapi.com/v1/geo";
 
 const fetchWeather = async ({ queryKey }) => {
   const [_key, body] = queryKey;

@@ -68,15 +68,6 @@ export default function Weather({
     fetchForecast
   );
 
-  useEffect(() => {
-    setTimeout(() => {
-      const [latitude, longitude] = JSON.parse(
-        localStorage.getItem("Favourites")
-      )[0].value.split(" ");
-      setCoords({ lat: latitude, lon: longitude });
-    }, 1000);
-  }, []);
-
   const handleOnChange = (searchData) => {
     setSearch(searchData);
     const [latitude, longitude] = searchData.value.split(" ");

@@ -69,6 +69,11 @@ const Home = () => {
       setFavourites(JSON.parse(localStorage.getItem("Favourites")));
     }
 
+    const [latitude, longitude] = JSON.parse(
+      localStorage.getItem("Favourites")
+    )[0].value.split(" ");
+    setCoords({ lat: latitude, lon: longitude });
+
     if (localStorage.getItem("Units") === "metric") {
       setUnit("metric");
     } else {
